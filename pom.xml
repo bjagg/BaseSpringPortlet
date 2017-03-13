@@ -225,6 +225,7 @@
     <build>
         <plugins>
             <plugin>
+                <!-- Override License Plugin with additional files to exclude from files to check for License header -->
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
                 <configuration>
@@ -265,10 +266,11 @@
 
     <profiles>
         <profile>
-            <id>localdev</id>
+            <id>pluto</id>
             <build>
                 <plugins>
                     <plugin>
+                        <!-- Generate a web.xml with Pluto required additions -->
                         <groupId>org.apache.portals.pluto</groupId>
                         <artifactId>maven-pluto-plugin</artifactId>
                         <executions>
@@ -281,16 +283,33 @@
                         </executions>
                     </plugin>
                     <plugin>
+                        <!-- Add Pluto generated web.xml into WAR file -->
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
                         <version>2.1</version>
                         <configuration>
-                            <classifier>localdev</classifier>
+                            <!-- Added to WAR file name -->
+                            <classifier>pluto</classifier>
+                            <!-- Override to set a specific name -->
                             <warName>${project.artifactId}</warName>
                             <webXml>${project.build.directory}/pluto-resources/web.xml</webXml>
+                            <overlays>
+                                <overlay>
+                                    <groupId>org.jasig.resourceserver</groupId>
+                                    <artifactId>resource-server-content</artifactId>
+                                    <includes>
+                                        <!-- Available includes found at
+                                             https://github.com/Jasig/resource-server/tree/master/resource-server-content/src/main/webapp/rs -->
+                                        <include>rs/jquery/1.6.1/</include>
+                                    </includes>
+                                </overlay>
+                            </overlays>
                         </configuration>
                     </plugin>
                     <plugin>
+                        <!-- Add single command portlet deployment with the following:
+                         mvn clean install org.jasig.portal:maven-uportal-plugin:deploy-war -Ppluto -Dmaven.tomcat.home=/path/to/my/tomcat
+                         -->
                         <groupId>org.jasig.portal</groupId>
                         <artifactId>maven-uportal-plugin</artifactId>
                         <configuration>
@@ -298,9 +317,13 @@
                             <artifactId>${project.artifactId}</artifactId>
                             <artifactGroupId>${project.groupId}</artifactGroupId>
                             <artifactVersion>${project.version}</artifactVersion>
-                            <artifactClassifier>localdev</artifactClassifier>
+                            <artifactClassifier>pluto</artifactClassifier>
                             <removeExistingDirectories>true</removeExistingDirectories>
                             <extractWars>true</extractWars>
+                            <!-- Next three entries added simply to pass IDE checks -->
+                            <outputRootDirectory/>
+                            <skinConfigurationFile/>
+                            <taskId/>
                         </configuration>
                     </plugin>
                 </plugins>
