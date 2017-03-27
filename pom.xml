@@ -53,6 +53,7 @@
     <packaging>war</packaging>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Java Versions Targeted by Compiler -->
         <project.build.sourceVersion>1.8</project.build.sourceVersion>
         <project.build.targetVersion>1.8</project.build.targetVersion>
@@ -228,6 +229,7 @@
                 <!-- Override License Plugin with additional files to exclude from files to check for License header -->
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
+                <version>3.0</version>
                 <configuration>
                     <excludes>
                         <!-- Include additional files to exclude from license checks/generation. -->
@@ -242,9 +244,20 @@
                 </configuration>
             </plugin>
             <plugin>
+                <!-- configure to use Java 6 to compile (change to your JDK) -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
                 <!-- Override parent dependency with Resource Server Content Overlay -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
+                <version>3.0.0</version>
                 <configuration>
                     <warName>BaseSpringPortlet</warName>
                     <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
@@ -262,6 +275,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>${project.artifactId}</finalName>
     </build>
 
     <profiles>
@@ -273,6 +287,7 @@
                         <!-- Generate a web.xml with Pluto required additions -->
                         <groupId>org.apache.portals.pluto</groupId>
                         <artifactId>maven-pluto-plugin</artifactId>
+                        <version>${pluto.version}</version>
                         <executions>
                             <execution>
                                 <phase>generate-resources</phase>
@@ -286,7 +301,7 @@
                         <!-- Add Pluto generated web.xml into WAR file -->
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
-                        <version>2.1</version>
+                        <version>3.0.0</version>
                         <configuration>
                             <!-- Added to WAR file name -->
                             <classifier>pluto</classifier>
@@ -312,6 +327,7 @@
                          -->
                         <groupId>org.jasig.portal</groupId>
                         <artifactId>maven-uportal-plugin</artifactId>
+                        <version>1.0.0-M4</version>
                         <configuration>
                             <contextName>${project.artifactId}</contextName>
                             <artifactId>${project.artifactId}</artifactId>
