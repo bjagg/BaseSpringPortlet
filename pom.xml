@@ -84,7 +84,7 @@
         <resource-server.version>1.0.44</resource-server.version>
 
         <!-- Testing -->
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13</junit.version>
     </properties>
 
     <dependencies>
