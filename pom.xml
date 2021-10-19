@@ -75,7 +75,7 @@
         <logback.version>1.2.3</logback.version>
 
         <!-- Spring Framework -->
-        <spring.version>4.3.28.RELEASE</spring.version>
+        <spring.version>4.3.30.RELEASE</spring.version>
 
         <!-- Resource Server (N.B. Brings in a few dependencies -->
         <resource-server.version>1.0.44</resource-server.version>
