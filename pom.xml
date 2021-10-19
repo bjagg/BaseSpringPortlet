@@ -224,7 +224,7 @@
                 <!-- Override parent dependency with Resource Server Content Overlay -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.3.2</version>
                 <configuration>
                     <warName>BaseSpringPortlet</warName>
                     <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
@@ -268,7 +268,7 @@
                         <!-- Add Pluto generated web.xml into WAR file -->
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
-                        <version>3.0.0</version>
+                        <version>3.3.2</version>
                         <configuration>
                             <!-- Added to WAR file name -->
                             <classifier>pluto</classifier>
