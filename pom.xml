@@ -196,7 +196,7 @@
                 <!-- Override License Plugin with additional files to exclude from files to check for License header -->
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>3.0</version>
+                <version>4.1</version>
                 <configuration>
                     <excludes>
                         <!-- Include additional files to exclude from license checks/generation. -->
