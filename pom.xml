@@ -78,7 +78,7 @@
         <spring.version>4.3.28.RELEASE</spring.version>
 
         <!-- Resource Server (N.B. Brings in a few dependencies -->
-        <resource-server.version>1.0.44</resource-server.version>
+        <resource-server.version>1.5.0</resource-server.version>
 
         <!-- Testing -->
         <junit.version>4.13.1</junit.version>
